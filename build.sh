@@ -145,7 +145,7 @@ echo "::group::Device and Kernel Tree Cloning"
 printf "Cloning Device Tree\n"
 git clone ${DT_LINK} --depth=1 device/${VENDOR}/${CODENAME}
 # omni.dependencies file is a must inside DT, otherwise lunch fails
-[[ ! -f device/${VENDOR}/${CODENAME}/omni.dependencies ]] && printf "[\n]\n" > device/${VENDOR}/${CODENAME}/omni.dependencies
+[[ ! -f device/${VENDOR}/${CODENAME}/twrp.dependencies ]] && printf "[\n]\n" > device/${VENDOR}/${CODENAME}/twrp.dependencies
 if [[ ! -z "${KERNEL_LINK}" ]]; then
     printf "Using Manual Kernel Compilation\n"
     git clone ${KERNEL_LINK} --depth=1 kernel/${VENDOR}/${CODENAME}
@@ -173,7 +173,7 @@ export ALLOW_MISSING_DEPENDENCIES=true
 # and then `source` and `lunch` again
 
 source build/envsetup.sh
-lunch omni_${CODENAME}-${FLAVOR} || { printf "Compilation failed.\n"; exit 1; }
+lunch twrp_${CODENAME}-${FLAVOR} || { printf "Compilation failed.\n"; exit 1; }
 echo "::endgroup::"
 
 echo "::group::Compilation"
